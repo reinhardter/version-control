@@ -1,6 +1,7 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 #include <dht11.h>
+#define sensorPower 7 
 
 const int RELAY1 = 12;
 const int RELAY2 = 11;
