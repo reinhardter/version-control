@@ -1,11 +1,9 @@
-#define sensorPower 7
+#define sensorPower 7 
 #define sensorPin A0
 
 void setup() {
   pinMode(sensorPower, OUTPUT);
-
   digitalWrite(sensorPower, LOW);
-
   Serial.begin(9600);
 }
 
