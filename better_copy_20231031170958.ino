@@ -11,10 +11,10 @@ const int buttonPin = 2;
 const int dhtPin = 5;
 dht11 DHT;
 
-int soilValue;        //intitailising 
-int temperature;
-int humidity;
-int soilPercentage;
+int soilValue;        //intitailising the soil moisture sensor
+int temperature;      //intirailising the temperature for the DHT11
+int humidity;         //intirailising the humidy for the DHT11
+int soilPercentage;   
 
 volatile byte state = LOW;
 unsigned long buttonOnTime = 0;
@@ -22,12 +22,12 @@ unsigned long buttonOnTime = 0;
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 void setup() {
-  // Set up button pin as an input with pull-up resistor
-  pinMode(buttonPin, INPUT_PULLUP);
+  
+  pinMode(buttonPin, INPUT_PULLUP);    // Set up button pin as an input with pull-up resistor
 
-  // Initialize the LCD and turn off the backlight
-  lcd.init();
-  lcd.noBacklight();
+ 
+  lcd.init();               // Initialize the LCD and turn off the backlight
+  lcd.noBacklight();        //The screen starts off
 
   // Set relay pins as outputs
   pinMode(RELAY1, OUTPUT);
@@ -42,27 +42,24 @@ void setup() {
 }
 
 void loop() {
-  // Read soil moisture value from the analog pin
-  soilValue = analogRead(soilPin);
-  // Calculate soil moisture percentage
-  soilPercentage = 100 - ((soilValue / 1023) * 100);
+   soilValue = analogRead(soilPin);         // Read soil moisture value from the analog pin
+   soilPercentage = 100 - ((soilValue / 1023) * 100);     // Calculate soil moisture percentage
 
-  // Read temperature and humidity from the DHT11 sensor
-  int chk = DHT.read(dhtPin);
+  int chk = DHT.read(dhtPin);              // Read temperature and humidity from the DHT11 sensor
   temperature = DHT.temperature;
-  humidity = DHT.humidity;
+  humidity = DHT.humidity;                  // Read temperature and humidity from the DHT11 sensor
 
-  // Print soil moisture, temperature, and humidity to the serial monitor
-  Serial.print("Soil Moisture = ");
+  
+  Serial.print("Soil Moisture = "); //showing the senosr values in the serial monitor
   Serial.print(soilValue);
   Serial.println("%");
   delay(500);
 
-  Serial.print("Temperature = ");
+  Serial.print("Temperature = "); //showing the senosr values in the serial monitor
   Serial.println(temperature);
   delay(500);
 
-  Serial.print("Humidity % = ");
+  Serial.print("Humidity % = ");   //showing the senosr values in the serial monitor
   Serial.println(humidity);
   delay(500);
 
@@ -104,14 +101,14 @@ void TurnOffDisplay() {
 void TurnOnDisplay() {
   lcd.init();
   lcd.backlight();
-  lcd.setCursor(1, 0);
-  lcd.print("T:");
+  lcd.setCursor(1, 0); // setting where the values will be shown on the screen
+  lcd.print("T:"); // what will be shown on the creento identify what snesor value is what
   lcd.print(temperature);
-  lcd.setCursor(10, 0);
-  lcd.print("H:");
+  lcd.setCursor(10, 0); // setting where the values will be shown on the screen
+  lcd.print("H:"); // what will be shown on the creento identify what snesor value is what
   lcd.print(humidity);
-  lcd.setCursor(1, 1);
-  lcd.print("SM:");
+  lcd.setCursor(1, 1); // setting where the values will be shown on the screen
+  lcd.print("SM:");// what will be shown on the creento identify what snesor value is what
   lcd.print(soilValue);
 }
 
